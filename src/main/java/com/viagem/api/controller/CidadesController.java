@@ -19,7 +19,6 @@ public class CidadesController {
 	@Autowired
 	private CidadesRepository cidadesRepository;
 	
-	
 	@Autowired
 	private CidadesService cidadesService;	
 	
@@ -35,8 +34,14 @@ public class CidadesController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-	
-	
+
+	@GetMapping(value="/media/{cidadeId}")
+	public Optional<Cidades> calcularMedia(@PathVariable Long cidadeId, @RequestParam("dias")Integer dias){
+		Optional<Cidades> media = cidadesService.calcularMedia(cidadeId, dias);
+
+		return cidadesService.calcularMedia(cidadeId, dias);
+	}
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cidades salvar(@RequestBody Cidades cidade){

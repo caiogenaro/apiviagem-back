@@ -22,14 +22,13 @@ public class CozinhaController {
 	
 	
 	@Autowired
-	private CozinhaRepository cozinhaRepository;	
+	private CozinhaRepository cozinhaRepository;
 	
 	@Autowired
 	private CozinhaService cozinhaService;	
 	
 	@GetMapping
-	public List<Cozinha> listar() { return cozinhaRepository.findAll(); }	
-	
+	public List<Cozinha> listar() { return cozinhaRepository.findAll(); }
 	
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
