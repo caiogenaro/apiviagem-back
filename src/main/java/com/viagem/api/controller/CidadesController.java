@@ -1,9 +1,13 @@
 package com.viagem.api.controller;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +27,9 @@ public class CidadesController {
 	private CidadesService cidadesService;	
 	
 	@GetMapping
-	public List<Cidades> listar() { return cidadesRepository.findAll(); }
+	public Page<Cidades> listar(@RequestParam Optional<Integer> page) {
+		return cidadesService.listarPaginado(PageRequest.of(page.orElse(0), 6));
+	}
 
 	@GetMapping(value="/{cidadeId}")
 	public ResponseEntity<Cidades> buscarId(@PathVariable Long cidadeId){
@@ -38,8 +44,7 @@ public class CidadesController {
 	@GetMapping(value="/media/{cidadeId}")
 	public Optional<Cidades> calcularMedia(@PathVariable Long cidadeId, @RequestParam("dias")Integer dias){
 		Optional<Cidades> media = cidadesService.calcularMedia(cidadeId, dias);
-
-		return cidadesService.calcularMedia(cidadeId, dias);
+		return media;
 	}
 
 	@PostMapping

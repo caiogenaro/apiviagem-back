@@ -26,6 +26,9 @@ public class Cidades {
     @Column(name ="valor_passagem")
     private Integer valor;
 
+    @Column(name ="valor_refeicao")
+    private Integer valorRefeicao;
+
 
     @ManyToOne
     @JoinColumn(name ="id_cozinha")
