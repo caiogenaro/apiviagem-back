@@ -27,10 +27,9 @@ public class CidadesService {
     }
 
 
-	public Page<Cidades> listarPaginado(Pageable pageable) throws Exception {
+	public Page<Cidades> listarPaginado(Pageable pageable, Sort sort) throws Exception {
 	    if(pageable.getPageNumber() <= 4){
-
-            return cidadesRepository.findAll(pageable);
+            return cidadesRepository.buscarTudo(pageable, sort);
         }
 	    else{
             throw new Exception("Pagina nao existe");
@@ -47,7 +46,7 @@ public class CidadesService {
         cidadeInfo.get().setMedia(media);
         return cidadeInfo;
     }
-    
+
     }
 
 

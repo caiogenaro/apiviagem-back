@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,21 +21,21 @@ import com.viagem.api.service.CidadesService;
 @RestController
 @RequestMapping(value="/cidades")
 public class CidadesController {
-	
+
 	@Autowired
 	private CidadesRepository cidadesRepository;
-	
+
 	@Autowired
 	private CidadesService cidadesService;
 
-    @GetMapping
-    public List<Cidades> listar() {
-        return cidadesService.listar();
-    }
-	
+	@GetMapping
+	public List<Cidades> listar() {
+		return cidadesService.listar();
+	}
+
 	@GetMapping(value="/listarPaginado")
 	public Page<Cidades> listar(@RequestParam Optional<Integer> page) throws Exception {
-		return cidadesService.listarPaginado(PageRequest.of(page.orElse(0), 6));
+		return cidadesService.listarPaginado(PageRequest.of(page.orElse(0), 6), Sort.by("valor").ascending());
 	}
 
 	@GetMapping(value="/{cidadeId}")
@@ -57,7 +59,7 @@ public class CidadesController {
 	public Cidades salvar(@RequestBody Cidades cidade){
 		return cidadesService.salvar(cidade);
 	}
-	
-	
+
+
 
 }
