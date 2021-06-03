@@ -22,8 +22,20 @@ public class CidadesService {
 	private CidadesRepository cidadesRepository;
 
 
-	public Page<Cidades> listarPaginado(Pageable pageable){
-        return cidadesRepository.findAll(pageable);
+	public List<Cidades> listar(){
+	    return cidadesRepository.findAll();
+    }
+
+
+	public Page<Cidades> listarPaginado(Pageable pageable) throws Exception {
+	    if(pageable.getPageNumber() <= 4){
+
+            return cidadesRepository.findAll(pageable);
+        }
+	    else{
+            throw new Exception("Pagina nao existe");
+        }
+
 
 	}
 	

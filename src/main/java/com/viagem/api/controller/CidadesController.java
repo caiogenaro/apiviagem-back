@@ -24,10 +24,15 @@ public class CidadesController {
 	private CidadesRepository cidadesRepository;
 	
 	@Autowired
-	private CidadesService cidadesService;	
+	private CidadesService cidadesService;
+
+    @GetMapping
+    public List<Cidades> listar() {
+        return cidadesService.listar();
+    }
 	
-	@GetMapping
-	public Page<Cidades> listar(@RequestParam Optional<Integer> page) {
+	@GetMapping(value="/listarPaginado")
+	public Page<Cidades> listar(@RequestParam Optional<Integer> page) throws Exception {
 		return cidadesService.listarPaginado(PageRequest.of(page.orElse(0), 6));
 	}
 
