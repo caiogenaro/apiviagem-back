@@ -12,6 +12,4 @@ import java.util.List;
 
 @Repository
 public interface CidadesRepository extends JpaRepository<Cidades, Long>{
-
-    Page<Cidades> buscarTudo(Pageable pageable, Sort sort);
 }

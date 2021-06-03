@@ -27,15 +27,8 @@ public class CidadesService {
     }
 
 
-	public Page<Cidades> listarPaginado(Pageable pageable, Sort sort) throws Exception {
-	    if(pageable.getPageNumber() <= 4){
-            return cidadesRepository.buscarTudo(pageable, sort);
-        }
-	    else{
-            throw new Exception("Pagina nao existe");
-        }
-
-
+	public Page<Cidades> listarPaginado(Pageable pageable)  {
+	    return cidadesRepository.findAll(pageable);
 	}
 	
     public Cidades salvar(Cidades cidade){ return cidadesRepository.save(cidade); }

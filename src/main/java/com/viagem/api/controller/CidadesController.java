@@ -34,8 +34,8 @@ public class CidadesController {
 	}
 
 	@GetMapping(value="/listarPaginado")
-	public Page<Cidades> listar(@RequestParam Optional<Integer> page) throws Exception {
-		return cidadesService.listarPaginado(PageRequest.of(page.orElse(0), 6), Sort.by("valor").ascending());
+	public Page<Cidades> listar(@RequestParam Optional<Integer> page, @RequestParam(defaultValue = "valor") String order) {
+		return cidadesService.listarPaginado(PageRequest.of(page.orElse(0), 6, Sort.by(order).ascending()));
 	}
 
 	@GetMapping(value="/{cidadeId}")
