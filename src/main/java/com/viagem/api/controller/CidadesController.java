@@ -33,6 +33,7 @@ public class CidadesController {
 		return cidadesService.listar();
 	}
 
+
 	@GetMapping(value="/listarPaginado")
 	public Page<Cidades> listar(@RequestParam Optional<Integer> page, @RequestParam(defaultValue = "valor") String order) {
 		return cidadesService.listarPaginado(PageRequest.of(page.orElse(0), 6, Sort.by(order).ascending()));
